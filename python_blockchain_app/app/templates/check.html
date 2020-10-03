@@ -1,0 +1,239 @@
+<html>
+  <head>
+    <title>VERIFICATION PORTAL</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	
+	<script>
+	/*window.onload = function () {
+		var url = document.location.href,
+        params = url.split('?')[1].split('&'),
+        data = {}, tmp;
+		for (var i = 0, l = params.length; i < l; i++) {
+         tmp = params[i].split('=');
+         data[tmp[0]] = tmp[1];
+		}
+		console.log(data.hash1);
+		var text = data.hash1;
+		document.getElementById("hash1").value = text;*/
+	</script>
+	
+	<script>
+	
+	//Retrieving the information from the Blockchain in JSON format.
+	var detail;
+		fetch('http://127.0.0.1:8000/chain')
+			.then(res => res.json())
+			.then((out) => {
+				var data = out;
+				console.log(out);
+				var rdata = JSON.stringify(data);
+				console.log(rdata);
+				var record = JSON.parse(rdata);
+				console.log(record);
+				
+				//Validating the Transactions here
+				var i;
+				for (i = 0; i < record.length; i++) 
+				{
+					detail = record.chain[i];
+					var trans = detail.transactions;
+					var content = JSON.stringify(trans);
+					
+					var check = content.includes("")
+					console.log(detail);
+					console.log(trans);
+					console.log(content);
+				}
+				//var detail = record.chain[3].transactions;
+				//console.log(detail);
+		}).catch(err => console.error(err));
+		
+		console.log(detail);
+		
+		function verify()
+		{
+			//Checking the data from the fetched blockchain hash with the user input:
+			var data = document.getElementById("hash1").innerHTML;
+			console.log(data);
+			if (detail == data)
+			{
+			  console.log();
+			}
+			  var x = document.getElementById("yes");
+			  var y = document.getElementById("no");
+				  if (x.style.display === "none") 
+				  { 
+					x.style.display = "block";
+					y.style.display = "none";
+				  } 
+				  else 
+				  {
+					x.style.display = "none";
+					y.style.display = "block";
+				  }
+		}
+</script>
+<script>
+</script>
+	   <style>
+			button{
+			    background-color:#8c52ff;
+			    padding:8px;
+			    color:white;
+			    cursor:pointer;
+				border-radius:10px;
+				font-weight:bold;
+				width:300px;
+				text-decoration: none;
+				outline: none;
+				box-shadow: 0 4px #999;
+				display: inline-block;
+			}
+			.option-btn{
+			 background- color:#8c52ff;
+			}
+			button:active 
+			{
+				background-color: #8c52aa;
+				box-shadow: 0 5px #666;
+				transform: translateY(4px);
+			}
+			.btn:active 
+			{
+				background-color: #8c52aa;
+				box-shadow: 0 5px #666;
+				transform: translateY(4px);
+			}
+			.btn{
+			    background-color:#8c52ff;
+			    padding:8px;
+			    color:white;
+			    cursor:pointer;
+				border-radius:10px;
+				font-weight:bold;
+				width:200px;
+				text-decoration: none;
+				outline: none;
+				box-shadow: 0 4px #999;
+			}
+			button:hover {
+				background-color:#8c52aa;
+				color:#ffffff;
+			}
+			.btn:hover {
+				background-color:#8c52aa;
+				color:#ffffff;
+			}
+			.Request {
+			    padding:5px;
+			    background-color:transparent;
+				border-radius:5px;	
+			    border-bottom:solid 4px #8c52ff;
+			    width:350px;
+			    font-size:16px;
+			}
+			#hash1{
+			width:650px;
+			text-align:center;
+			}
+			h1 
+			{ 
+			font-family: Verdana, Geneva, sans-serif; font-size: 30px; 
+			font-style: normal; 
+			font-variant: normal; 
+			font-weight: 700; 
+			line-height: 26.4px; 
+			}
+			#yes{
+			display:none;
+			}
+			#no{
+			display:none;
+			}
+	   </style>
+  </head>
+  <body>
+    <center><h1>CUSTOMER VALIDATIION PORTAL</h1></center>
+    <hr>
+	<br><br>
+	<center>
+	<form action="#" id="textform" method="post">
+	    <input class="Request" type="text" id="hash1" placeholder="Your Transaction Hash!!" required>
+		<br><br>
+	    <input class="btn" type="submit" value="Submit For Verification" onclick="verify()">
+	</form>
+	<div id="yes">
+		<img src = "verified.jpg">
+	</div>	
+	<div id="no">
+		<img src = "rejected.jpg">
+	</div>
+	</center>
+
+	<br>
+
+	<style>
+		.post_box {
+		    background: #fff;
+		    padding: 12px 0px 0px 12px;
+		    margin-top: 0px;
+		    margin-bottom: 8px;
+		    border-top: 1px solid #f0f0f0;
+		}
+
+		.post_box-header {
+		    padding-bottom: 12px;
+		}
+
+		.post_box-avatar {
+		    width: 38px;
+		    height: 38px;
+		    border-radius: 50%;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    color: white;
+		    font-size: 22px;
+		    float: left;
+		    margin-right: 16px;
+		    border: 1px solid #fff;
+		    box-shadow: 0px 0px 0px 2px #f00;
+		}
+
+		.post_box-avatar::after {
+		    content:"";
+		    display:block;
+		}
+
+		.post_box-name {
+		    font-weight: bold;
+		}
+
+		.post_box-subtitle {
+		    color: #777;
+		}
+
+		.post_box-body {
+		    margin-top: 16px;
+		    margin-bottom: 8px;
+		}
+
+		.post_box-options {
+		    float: right;
+		}
+		.option-btn {
+		    background: #f8f8f8;
+		    border: none;
+		    color: #2c3e50;
+		    padding: 7px;
+		    cursor: pointer;
+		    font-size: 14px;
+		    margin-left: 2px;
+		    margin-right: 2px;
+		    outline: none;
+		    height: 42px;
+		}
+	</style>
+
+</html>
